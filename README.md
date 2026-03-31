@@ -131,3 +131,38 @@ yarn build
 Made with ❤️ by Subhadeep Mondal
 
 </div>
+
+## 🌐 Deployment
+
+### Deploy to Vercel
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/smondal1174/Subhadeep_Mondal_Portfolio)
+
+1. Click the "Deploy" button above
+2. Connect your GitHub account
+3. Configure the project (build command: `cd frontend && yarn build`)
+4. Deploy!
+
+### Deploy to Netlify
+
+1. Build the project: `cd frontend && yarn build`
+2. Drag and drop the `frontend/build` folder to [Netlify](https://app.netlify.com/drop)
+
+### Manual Deployment
+
+```bash
+# Build for production
+cd frontend
+yarn build
+
+# The build folder contains optimized production files
+# Upload to your hosting provider
+```
+
+## 📝 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+---
+
+**Last Updated**: March 2026
