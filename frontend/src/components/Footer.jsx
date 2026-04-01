@@ -51,7 +51,7 @@ const Footer = () => {
                 Email
               </a>
               <a
-                href="https://linkedin.com/in/subhadeepmondal"
+                href="https://www.linkedin.com/in/subhadeep-mondal-kiit/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center text-slate-400 hover:text-cyan-400 transition-colors text-sm"
@@ -60,7 +60,7 @@ const Footer = () => {
                 LinkedIn
               </a>
               <a
-                href="https://github.com/subhadeepmondal"
+                href="https://github.com/smondal1174"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center text-slate-400 hover:text-cyan-400 transition-colors text-sm"

@@ -143,8 +143,8 @@ export const portfolioData = {
   languages: ["English", "Bengali", "Hindi"],
 
   social: {
-    linkedin: "https://linkedin.com/in/subhadeepmondal",
-    github: "https://github.com/subhadeepmondal",
+    linkedin: "https://www.linkedin.com/in/subhadeep-mondal-kiit/",
+    github: "https://github.com/smondal1174",
     email: "subhadeep.mondal2001@gmail.com"
   }
 };

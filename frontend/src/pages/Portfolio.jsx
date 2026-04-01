@@ -361,8 +361,8 @@ const ContactSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           {[
             { icon: 'Mail', label: 'Email', value: 'subhadeep.mondal2001@gmail.com', link: 'mailto:subhadeep.mondal2001@gmail.com' },
-            { icon: 'Linkedin', label: 'LinkedIn', value: 'Connect on LinkedIn', link: 'https://linkedin.com/in/subhadeepmondal' },
-            { icon: 'Github', label: 'GitHub', value: 'View my code', link: 'https://github.com/subhadeepmondal' }
+            { icon: 'Linkedin', label: 'LinkedIn', value: 'Connect on LinkedIn', link: 'https://www.linkedin.com/in/subhadeep-mondal-kiit/' },
+            { icon: 'Github', label: 'GitHub', value: 'View my code', link: 'https://github.com/smondal1174' }
           ].map((contact, index) => {
             const Icon = LucideIcons[contact.icon];
             return (
