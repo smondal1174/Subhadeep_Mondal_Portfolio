@@ -170,3 +170,5 @@ This project is open source and available under the [MIT License](LICENSE).
 ## Career content
 
 Career copy is aligned with the November resume: Data Engineer II at MiQ Digital (Apr 2025–Present), Data Engineer I (Jul 2022–Apr 2025). Edit `frontend/src/data/portfolioData.js` for the summary, metrics, experience, skills, project approaches, education, and achievements. Project artwork is illustrative; the displayed outcomes come from the resume.
+
+Education includes St. Teresa's School (ICSE, 91%), Vikas Vidyaniketan (CBSE, 94%), and KIIT (9.2 GPA), as provided by the portfolio owner.

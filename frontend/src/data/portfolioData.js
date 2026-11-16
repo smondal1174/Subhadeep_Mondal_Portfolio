@@ -183,13 +183,28 @@ export const portfolioData = {
       icon: "badge-check",
     },
   ],
-  education: {
-    institution: "Kalinga Institute of Industrial Technology (KIIT)",
-    degree: "Bachelor of Technology in Computer Science and Engineering",
-    location: "Bhubaneswar, India",
-    cgpa: "9.4",
-    period: "2019 – 2023",
-  },
+  education: [
+    {
+      institution: "St. Teresa's School",
+      qualification: "ICSE",
+      result: "91%",
+      resultLabel: "Percentage",
+    },
+    {
+      institution: "Vikas Vidyaniketan",
+      qualification: "CBSE",
+      result: "94%",
+      resultLabel: "Percentage",
+    },
+    {
+      institution: "Kalinga Institute of Industrial Technology (KIIT)",
+      qualification:
+        "Bachelor of Technology in Computer Science and Engineering",
+      result: "9.2",
+      resultLabel: "GPA",
+      period: "2019 – 2023",
+    },
+  ],
   interests: ["Cricket", "Formula 1", "Movies"],
   languages: ["English", "Bengali", "Hindi"],
   social: {

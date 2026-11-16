@@ -342,25 +342,44 @@ export default function Portfolio() {
                 Apache Pinot, AWS, and GCP. Away from the keyboard, it's{" "}
                 {data.interests.join(", ").toLowerCase()}.
               </p>
-              <div className="education">
-                <GraduationCap size={24} />
-                <div>
-                  <strong>{data.education.degree}</strong>
-                  <span>{data.education.institution}</span>
-                  <small>
-                    {data.education.period} <b>CGPA {data.education.cgpa}/10</b>
-                  </small>
-                </div>
-              </div>
               <div className="language-line">
                 LET'S TALK IN <span>{data.languages.join(" / ")}</span>
               </div>
             </div>
           </div>
         </section>
-        <section className="section wrap reveal" id="experience">
+        <section
+          className="section wrap reveal education-section"
+          id="education"
+        >
           <SectionHeading
             number="03"
+            label="ACADEMIC BACKGROUND"
+            title="Education"
+          />
+          <div className="education-grid">
+            {data.education.map((item, i) => (
+              <article className="education-card" key={item.institution}>
+                <div className="education-card-top">
+                  <span>0{i + 1}</span>
+                  <GraduationCap size={25} />
+                </div>
+                <p className="education-qualification">{item.qualification}</p>
+                <h3>{item.institution}</h3>
+                {item.period && (
+                  <p className="education-period">{item.period}</p>
+                )}
+                <div className="education-result">
+                  <strong>{item.result}</strong>
+                  <span>{item.resultLabel}</span>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+        <section className="section wrap reveal" id="experience">
+          <SectionHeading
+            number="04"
             label="THE JOURNEY"
             title={
               <>
@@ -403,7 +422,7 @@ export default function Portfolio() {
         <section className="skills-section" id="skills">
           <div className="wrap section reveal">
             <SectionHeading
-              number="04"
+              number="05"
               label="THE TOOLKIT"
               title={
                 <>
@@ -448,7 +467,7 @@ export default function Portfolio() {
         <section id="contact" className="contact-section">
           <div className="wrap reveal">
             <p className="eyebrow">
-              <span>05</span> WHAT'S NEXT?
+              <span>06</span> WHAT'S NEXT?
             </p>
             <div className="contact-heading">
               <h2>
