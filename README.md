@@ -7,7 +7,7 @@
 ![TailwindCSS](https://img.shields.io/badge/Tailwind-3.4.17-38B2AC?style=for-the-badge&logo=tailwind-css)
 ![Status](https://img.shields.io/badge/Status-Live-success?style=for-the-badge)
 
-**Modern, responsive portfolio website showcasing 2+ years of Data Engineering experience**
+**Modern, responsive portfolio website showcasing 4+ years of Data Engineering experience**
 
 [View Live Demo](#) | [View CV](https://github.com/smondal1174) | [Contact Me](mailto:subhadeep.mondal2001@gmail.com)
 
@@ -166,3 +166,7 @@ This project is open source and available under the [MIT License](LICENSE).
 ---
 
 **Last Updated**: March 2026
+
+## Career content
+
+Career copy is aligned with the November resume: Data Engineer II at MiQ Digital (Apr 2025–Present), Data Engineer I (Jul 2022–Apr 2025). Edit `frontend/src/data/portfolioData.js` for the summary, metrics, experience, skills, project approaches, education, and achievements. Project artwork is illustrative; the displayed outcomes come from the resume.

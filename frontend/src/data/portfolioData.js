@@ -1,150 +1,200 @@
-// Portfolio data extracted from CV
+// Career content aligned with SUBHADEEP_MONDAL_NOV.pdf.
 export const portfolioData = {
   personal: {
     name: "Subhadeep Mondal",
-    title: "Data Engineer",
-    tagline: "Building high-performance data pipelines that drive $100M+ in revenue",
+    title: "Data Engineer II",
+    company: "MiQ Digital",
+    experience: "4+ years",
     location: "Bengaluru, India",
     email: "subhadeep.mondal2001@gmail.com",
-    phone: "+91-8927149558",
-    summary: "Data Engineer with 2+ years of experience building and optimizing high-volume, cloud-native data pipelines. Specialized in reducing costs, improving performance, and implementing DataOps best practices. Proven track record of delivering measurable business impact through technical excellence."
+    summary:
+      "Data Engineer with 4+ years of experience designing, developing, and optimizing large-scale batch and low-latency data pipelines and distributed processing systems. Strong expertise in Databricks, PySpark, Apache Spark, Snowflake, Delta Lake, and Unity Catalog, with hands-on experience building cloud-native ETL frameworks, optimizing complex SQL workloads, and implementing production-grade data quality and observability across AWS and GCP.",
   },
-
   keyMetrics: [
     {
-      value: "83%",
-      label: "Runtime Reduction",
-      description: "6 hours to 1 hour",
-      icon: "zap"
+      value: "45%",
+      label: "Faster Lakehouse Refresh",
+      description: "Config-driven ETL · 12M+ records",
+      icon: "zap",
     },
     {
-      value: "$100M",
-      label: "Revenue Support",
-      description: "TV Intelligence Dashboard",
-      icon: "trending-up"
+      value: "35%",
+      label: "Lower Compute Costs",
+      description: "Spark workload optimization",
+      icon: "trending-up",
     },
     {
-      value: "1TB/day",
-      label: "Data Processing",
-      description: "High-throughput pipelines",
-      icon: "database"
+      value: "50M+",
+      label: "Rows per Batch Run",
+      description: "Idempotent, fault-tolerant writes",
+      icon: "database",
     },
     {
-      value: "100+",
-      label: "Hours Saved",
-      description: "Analyst automation",
-      icon: "clock"
-    }
+      value: "60%",
+      label: "Fewer Production Incidents",
+      description: "Quality gates across 8+ pipelines",
+      icon: "activity",
+    },
   ],
-
   experience: [
     {
-      company: "MIQ",
+      company: "MiQ Digital",
       role: "Data Engineer II",
       location: "Bengaluru, India",
-      period: "Apr 2025 - Present",
+      period: "Apr 2025 – Present",
       achievements: [
-        "Designed and implemented an end-to-end SQL query framework on Apache Pinot / StarTree for complex analytics using joins, window functions, CASE logic, and aggregations across multiple datasets",
-        "Tuned query execution plans and storage layouts for efficient processing of 100K+ rows per query, meeting strict SLA targets (<10s latency) under high concurrency",
-        "Led DataOps adoption across production pipelines by refactoring monolithic jobs into modular components, adding unit tests, and enforcing CI/CD quality gates using Jenkins",
-        "Built a centralized Databricks data health monitoring dashboard for tracking data arrival latency, pipeline runtimes, and SLA breaches, enabling proactive alerting and faster incident response"
-      ]
+        "Re-architected a monolithic pipeline into a config-driven ETL framework using PySpark, Delta Lake, and Unity Catalog on Databricks, reducing refresh runtime by 45% and powering a customer-facing analytics UI serving 12M+ records.",
+        "Integrated Snowflake with the Unity Catalog-managed AWS S3 data lake using External Volumes and Apache Iceberg tables, eliminating daily batch ingestion and reducing data refresh latency from 24 hours to near real-time.",
+        "Designed an end-to-end SQL query framework on Apache Pinot (StarTree) for complex joins, window functions, and multi-dataset aggregations; optimized storage layouts and execution plans to process 100K+ rows/query within a strict 10-second SLA under high concurrency.",
+        "Built fault-tolerant pipelines using AWS S3, PySpark, Delta Lake, and PostgreSQL, processing 50M+ rows/run with idempotent, partition-scoped writes and automated backfill support.",
+        "Optimized Spark workloads using AQE, broadcast joins, partition pruning, and Delta OPTIMIZE/ZORDER, resolving data skew and driver OOM errors while reducing cluster compute costs by 35%.",
+        "Automated ingestion across 3+ external APIs using Databricks Asset Bundles and Jenkins CI/CD, reducing monthly refresh cycles from 1 week to less than 1 day and saving 30+ engineering hours/month.",
+        "Strengthened 8+ critical pipelines with schema validation, data-quality gates, SLA dashboards, and automated alerts; achieved 70%+ pytest coverage and reduced production incidents by 60%.",
+      ],
     },
     {
-      company: "MIQ",
+      company: "MiQ Digital",
       role: "Data Engineer I",
       location: "Bengaluru, India",
-      period: "Jul 2023 - Apr 2025",
+      period: "Jul 2022 – Apr 2025",
       achievements: [
-        "Led development of a high-throughput batch processing pipeline handling 1 TB/day for a global TV intelligence dashboard, supporting reporting workflows tied to $100M in revenue",
-        "Optimized Databricks workloads using Delta Lake, Z-Order indexing, and strategic repartitioning, reducing end-to-end runtime from 6 hours to 1 hour and saving $1K/month in compute costs",
-        "Designed a US campaign snapshot pipeline and automated client-ready presentation generation using Python (pptx), saving 100+ analyst hours",
-        "Owned YouTube client-facing data pipelines, managing geo and temporal metrics, and processing 25GB+ datasets using Google Cloud Storage and BigQuery",
-        "Developed and maintained global DSP ETL ingestion pipelines across US, UK, AU, and CA markets, implementing alerting, monitoring, and DataOps best practices for production stability"
-      ]
-    }
+        "Spearheaded a high-throughput batch pipeline ingesting and transforming 1 TB/day for a global TV intelligence platform, powering reporting workflows tied to $100M+ in annual revenue.",
+        "Optimized legacy Databricks pipelines using Delta Lake, Z-Order indexing, and strategic repartitioning, reducing execution time by 83% (6 hours to 1 hour) and saving $12K+/year in cloud compute costs.",
+        "Owned client-facing YouTube analytics pipelines on GCP (GCS, BigQuery), processing 25GB+ daily datasets across granular geo-temporal dimensions for multi-market reporting.",
+        "Built and maintained scalable DSP ETL pipelines across US, UK, AU, and CA markets, incorporating automated alerting, SLA monitoring, and DataOps standards for high production availability.",
+        "Architected a US campaign snapshot pipeline integrated with automated client presentation generation using Python (python-pptx), eliminating manual reporting workflows and saving 100+ analyst hours/quarter.",
+      ],
+    },
   ],
-
   skills: {
-    "Languages & Frameworks": ["Python", "PySpark", "Pandas", "SQL"],
-    "Data Platforms": ["Databricks", "Apache Pinot", "Mixpanel", "StarTree"],
-    "Cloud & Warehousing": ["AWS", "GCS", "BigQuery", "Redshift", "Athena"],
-    "Databases": ["MySQL", "Delta Lake"],
-    "Practices": ["DataOps", "CI/CD", "Data Quality", "Monitoring", "ETL/ELT"]
+    "Programming & Query Languages": [
+      "Python",
+      "PySpark",
+      "SQL",
+      "Scala",
+      "Pandas",
+      "Pytest",
+      "Shell Scripting",
+    ],
+    "Big Data & Lakehouse": [
+      "Databricks",
+      "Apache Spark",
+      "Delta Lake",
+      "Unity Catalog",
+      "Databricks Workflows",
+      "Apache Iceberg",
+      "Apache Pinot (StarTree)",
+    ],
+    "Cloud & Data Warehousing": [
+      "AWS S3",
+      "Redshift",
+      "Athena",
+      "AWS Glue",
+      "Snowflake",
+      "GCP BigQuery",
+      "Google Cloud Storage",
+    ],
+    "Databases & Data Modeling": [
+      "PostgreSQL",
+      "MySQL",
+      "NoSQL",
+      "GraphDB",
+      "OLAP/OLTP",
+      "Data Modeling",
+      "Complex SQL Optimization",
+    ],
+    "Data Engineering & Operations": [
+      "ETL/ELT",
+      "Databricks Asset Bundles",
+      "Jenkins",
+      "Git",
+      "CI/CD",
+      "Data Quality",
+      "Schema Validation",
+      "Workflow Automation",
+      "SLA Monitoring",
+    ],
   },
-
   projects: [
     {
+      title: "Modular Lakehouse ETL Framework",
+      category: "LAKEHOUSE ARCHITECTURE",
+      description:
+        "A config-driven framework replacing a monolithic pipeline and powering a customer-facing analytics UI with 12M+ records.",
+      impact: "45% faster refresh",
+      tech: ["Databricks", "PySpark", "Delta Lake", "Unity Catalog"],
+      approach:
+        "Re-architected the monolithic pipeline into a modular, config-driven ETL framework on Databricks using PySpark, Delta Lake, and Unity Catalog. The resulting pipeline reduced refresh runtime by 45% while serving 12M+ records to the customer-facing analytics UI.",
+    },
+    {
+      title: "Snowflake & Iceberg Integration",
+      category: "CROSS-PLATFORM ANALYTICS",
+      description:
+        "Connected Snowflake to a Unity Catalog-managed AWS S3 lake using External Volumes and Apache Iceberg tables.",
+      impact: "24h → near real-time",
+      tech: ["Snowflake", "Apache Iceberg", "Unity Catalog", "AWS S3"],
+      approach:
+        "Integrated Snowflake with the Unity Catalog-managed AWS S3 data lake through External Volumes and Apache Iceberg tables, eliminating daily batch ingestion and reducing data refresh latency from 24 hours to near real-time.",
+    },
+    {
       title: "Apache Pinot Query Framework",
-      description: "End-to-end SQL query framework for complex analytics with joins, window functions, and aggregations",
-      impact: "<10s latency for 100K+ rows",
+      category: "LOW-LATENCY OLAP",
+      description:
+        "An end-to-end SQL framework for complex joins, window functions, and aggregations across multiple datasets.",
+      impact: "100K+ rows · 10-second SLA",
       tech: ["Apache Pinot", "StarTree", "SQL"],
-      icon: "database"
+      approach:
+        "Designed a reusable SQL query framework on Apache Pinot (StarTree). Tuned storage layouts and execution plans to process 100K+ rows/query within a strict 10-second SLA under high concurrency.",
     },
     {
-      title: "Data Health Monitoring Dashboard",
-      description: "Centralized Databricks dashboard for tracking pipeline health, latency, and SLA breaches",
-      impact: "Faster incident response",
-      tech: ["Databricks", "Python", "Monitoring"],
-      icon: "activity"
+      title: "High-Throughput Batch Pipelines",
+      category: "RESILIENT BATCH ENGINEERING",
+      description:
+        "Fault-tolerant pipelines with idempotent, partition-scoped writes and automated backfill support.",
+      impact: "50M+ rows/run",
+      tech: ["AWS S3", "PySpark", "Delta Lake", "PostgreSQL"],
+      approach:
+        "Built fault-tolerant batch pipelines spanning AWS S3, PySpark, Delta Lake, and PostgreSQL. Idempotent writes scoped to partitions and automated backfill support enabled processing of 50M+ rows per run.",
     },
-    {
-      title: "TV Intelligence Pipeline",
-      description: "High-throughput batch processing pipeline for global TV advertising intelligence",
-      impact: "$100M revenue support, 1TB/day",
-      tech: ["Databricks", "PySpark", "Delta Lake"],
-      icon: "tv"
-    },
-    {
-      title: "Automated Presentation Generator",
-      description: "Campaign snapshot pipeline with automated client-ready presentation generation",
-      impact: "100+ analyst hours saved",
-      tech: ["Python", "pptx", "Automation"],
-      icon: "file-presentation"
-    }
   ],
-
   achievements: [
     {
-      title: "Quarterly Best Performer",
-      organization: "MIQ",
+      title: "Quarterly Individual Best Performer",
+      organization: "MiQ Digital · Lakehouse & DataOps delivery",
       period: "Q4 2025",
-      icon: "award"
+      icon: "award",
     },
     {
       title: "Second Runner-Up",
-      organization: "Gen-AI Hackathon (Hack-IQ)",
-      period: "2025",
-      icon: "trophy"
+      organization: "Hack-IQ Gen-AI Hackathon · AI-driven analytics",
+      period: "MiQ Digital",
+      icon: "trophy",
     },
     {
       title: "Semester Topper",
-      organization: "KIIT",
-      period: "9.5 CGPA",
-      icon: "graduation-cap"
+      organization: "KIIT · Academic Excellence",
+      period: "9.5 SGPA",
+      icon: "graduation-cap",
     },
     {
-      title: "Databricks Certified",
-      organization: "Databricks Lakehouse Fundamentals",
-      period: "2024",
-      icon: "badge-check"
-    }
+      title: "Lakehouse Fundamentals Accreditation",
+      organization: "Databricks · Verified Credential",
+      period: "Accredited",
+      icon: "badge-check",
+    },
   ],
-
   education: {
-    institution: "Kalinga Institute of Industrial Technology",
-    degree: "B.Tech in Computer Science and Engineering",
-    location: "India",
+    institution: "Kalinga Institute of Industrial Technology (KIIT)",
+    degree: "Bachelor of Technology in Computer Science and Engineering",
+    location: "Bhubaneswar, India",
     cgpa: "9.4",
-    period: "2019 - 2023"
+    period: "2019 – 2023",
   },
-
   interests: ["Cricket", "Formula 1", "Movies"],
   languages: ["English", "Bengali", "Hindi"],
-
   social: {
     linkedin: "https://www.linkedin.com/in/subhadeep-mondal-kiit/",
     github: "https://github.com/smondal1174",
-    email: "subhadeep.mondal2001@gmail.com"
-  }
+    email: "subhadeep.mondal2001@gmail.com",
+  },
 };

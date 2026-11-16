@@ -43,7 +43,7 @@ function PipelineVisual() {
         <span>
           <i /> THE DATA ENGINEER'S CANVAS
         </span>
-        <span>01 / 03</span>
+        <span>INGEST → INSIGHT</span>
       </div>
       <div className="orbit orbit-one" />
       <div className="orbit orbit-two" />
@@ -93,26 +93,11 @@ function PipelineVisual() {
           <br />
           <strong>To real business impact.</strong>
         </span>
-        <span className="visual-mark">
-          SM<span>®</span>
-        </span>
+        <span className="visual-mark">SM</span>
       </div>
     </div>
   );
 }
-
-const projectNotes = [
-  "Designed a reusable SQL framework for complex analytics across multiple datasets. Tuned execution plans and storage layouts to meet strict latency targets under concurrent workloads.",
-  "Brought data arrival latency, pipeline runtimes, and SLA breaches into one Databricks view, helping the team detect issues sooner and respond with better context.",
-  "Built a high-throughput pipeline for global TV advertising intelligence. Delta Lake, Z-Order indexing, and strategic repartitioning helped cut processing time from six hours to one.",
-  "Connected campaign snapshots to automated, client-ready presentations with Python, replacing repetitive reporting work and saving more than 100 analyst hours.",
-];
-const projectLabels = [
-  "REAL-TIME ANALYTICS",
-  "DATA RELIABILITY",
-  "PIPELINE ENGINEERING",
-  "WORKFLOW AUTOMATION",
-];
 
 export default function Portfolio() {
   const [expanded, setExpanded] = useState(null);
@@ -163,9 +148,9 @@ export default function Portfolio() {
               into <em>possibility.</em>
             </h1>
             <p className="hero-description">
-              Data Engineer at <strong>MiQ.</strong> Building dependable
-              pipelines, making analytics faster, and turning complex data into
-              meaningful business outcomes.
+              {data.personal.title} at <strong>{data.personal.company}.</strong>{" "}
+              {data.personal.experience} building large-scale batch and
+              low-latency pipelines across Databricks, Snowflake, AWS, and GCP.
             </p>
             <div className="hero-actions">
               <a className="button button-primary" href="#projects">
@@ -176,7 +161,8 @@ export default function Portfolio() {
               </a>
             </div>
             <div className="hero-footnote">
-              <span className="mini-rule" /> PYTHON · PYSPARK · DATABRICKS · SQL
+              <span className="mini-rule" /> PYSPARK · DATABRICKS · SNOWFLAKE ·
+              SQL
             </div>
           </div>
           <PipelineVisual />
@@ -231,7 +217,7 @@ export default function Portfolio() {
               </>
             }
           >
-            A selection of production work at MiQ — from high-throughput
+            A selection of production work at MiQ Digital — from high-throughput
             pipelines to analytics that keep up with the business.
           </SectionHeading>
           <div className="projects-grid">
@@ -241,8 +227,38 @@ export default function Portfolio() {
                 key={project.title}
               >
                 <div className="project-art" aria-hidden="true">
-                  <span className="art-label">{projectLabels[i]}</span>
+                  <span className="art-label">{project.category}</span>
                   {i === 0 ? (
+                    <div className="lakehouse-art">
+                      <div className="lakehouse-scale">
+                        <strong>12M+</strong>
+                        <span>RECORDS IN THE ANALYTICS UI</span>
+                      </div>
+                      <div className="lakehouse-steps">
+                        <span>CONFIG</span>
+                        <ArrowRight size={16} />
+                        <span>PySpark</span>
+                        <ArrowRight size={16} />
+                        <span>DELTA</span>
+                      </div>
+                      <p>45% less refresh runtime</p>
+                    </div>
+                  ) : i === 1 ? (
+                    <div className="automation-art integration-art">
+                      <div>
+                        <Layers3 size={27} />
+                        <span>Unity Catalog / S3</span>
+                      </div>
+                      <ArrowRight size={24} />
+                      <div>
+                        <Database size={27} />
+                        <span>Snowflake</span>
+                      </div>
+                      <span className="automation-stamp">
+                        APACHE ICEBERG · EXTERNAL VOLUMES
+                      </span>
+                    </div>
+                  ) : i === 2 ? (
                     <div className="query-art">
                       <div>
                         <span>SELECT</span> business_impact
@@ -254,57 +270,15 @@ export default function Portfolio() {
                         <span>WHERE</span> latency <b>&lt; 10s</b>
                       </div>
                       <div className="query-result">
-                        <i /> Query complete <strong>&lt;10s</strong>
+                        <i /> 100K+ rows/query <strong>10s SLA</strong>
                       </div>
-                    </div>
-                  ) : i === 1 ? (
-                    <div className="monitor-art">
-                      <div>
-                        <span>PIPELINE HEALTH</span>
-                        <i /> Monitoring
-                      </div>
-                      <div className="monitor-chart">
-                        {[
-                          23, 41, 31, 57, 44, 67, 52, 74, 63, 84, 73, 91, 83,
-                          103, 94, 114, 104, 121,
-                        ].map((h, n) => (
-                          <span key={n} style={{ height: h }} />
-                        ))}
-                      </div>
-                      <span className="chart-caption">
-                        VISIBILITY ACROSS EVERY STAGE
-                      </span>
-                    </div>
-                  ) : i === 2 ? (
-                    <div className="runtime-art">
-                      <div>
-                        <span>BEFORE</span>
-                        <b>6h</b>
-                        <i />
-                      </div>
-                      <div>
-                        <span>AFTER</span>
-                        <b>
-                          1h <ArrowDown size={20} />
-                        </b>
-                        <i />
-                      </div>
-                      <p>Same workload. A faster path.</p>
                     </div>
                   ) : (
-                    <div className="automation-art">
-                      <div>
-                        <Database size={27} />
-                        <span>Campaign data</span>
-                      </div>
-                      <ArrowRight size={24} />
-                      <div>
-                        <Layers3 size={27} />
-                        <span>Client-ready stories</span>
-                      </div>
-                      <span className="automation-stamp">
-                        100+ HOURS RECLAIMED
-                      </span>
+                    <div className="batch-art">
+                      <Database size={31} />
+                      <strong>50M+</strong>
+                      <span>ROWS / RUN</span>
+                      <p>Idempotent writes. Automated backfills.</p>
                     </div>
                   )}
                   <span className="art-number">0{i + 1}</span>
@@ -315,7 +289,7 @@ export default function Portfolio() {
                     <span className="impact-tag">{project.impact}</span>
                   </div>
                   <h3>{project.title}</h3>
-                  <p>{project.description}.</p>
+                  <p>{project.description}</p>
                   <div className="project-tech">
                     {project.tech.map((tech) => (
                       <span key={tech}>{tech}</span>
@@ -335,7 +309,7 @@ export default function Portfolio() {
                     hidden={expanded !== i}
                     className="project-detail"
                   >
-                    {projectNotes[i]}
+                    {project.approach}
                   </div>
                 </div>
               </article>
@@ -413,7 +387,7 @@ export default function Portfolio() {
                   <div className="role-title">
                     <h3>{exp.role}</h3>
                     <span>
-                      MiQ <ArrowUpRight size={18} />
+                      {exp.company} <ArrowUpRight size={18} />
                     </span>
                   </div>
                   <ul>
