@@ -60,10 +60,10 @@ frontend/
 
 ## 🎨 Design Features
 
-- **Clean UI**: Modern, professional design with IBM Plex Sans & JetBrains Mono fonts
-- **Color Scheme**: Tech-inspired slate gray with cyan accents
-- **Animations**: Smooth transitions and hover effects
-- **Components**: Cards, badges, buttons, and forms using shadcn/ui
+- **Clean UI**: Editorial layout with Manrope, DM Sans, and IBM Plex Mono typography
+- **Color Scheme**: Warm ivory, ink, sage, and burnt-orange accents
+- **Animations**: Subtle scroll reveals and an illustrative pipeline with reduced-motion support
+- **Components**: Custom project visuals, expandable project details, sticky navigation, and email copying
 - **Icons**: Lucide React icon library
 
 ## 🚀 Getting Started
@@ -105,7 +105,7 @@ yarn build
 4. **Skills** - Organized technical skills showcase
 5. **Projects** - Key projects with business impact
 6. **Achievements** - Certifications and recognition
-7. **Contact** - Contact form and social links
+7. **Contact** - Direct email, copy-email action, and social links
 
 ## 📫 Contact
 
