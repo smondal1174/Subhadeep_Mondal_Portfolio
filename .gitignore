@@ -33,3 +33,7 @@ yarn-error.log*
 # logs
 logs
 *.log
+
+# Nested frontend dependencies and output
+/frontend/node_modules/
+/frontend/build/

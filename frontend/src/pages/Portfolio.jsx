@@ -1,438 +1,520 @@
-import React, { useEffect } from 'react';
-import * as LucideIcons from 'lucide-react';
-import { Card } from '../components/ui/card';
-import { Button } from '../components/ui/button';
-import { Badge } from '../components/ui/badge';
-import { portfolioData } from '../data/portfolioData';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+import React, { useEffect, useState } from "react";
+import {
+  ArrowUpRight,
+  ArrowDown,
+  ArrowRight,
+  Database,
+  Layers3,
+  BarChart3,
+  Github,
+  Linkedin,
+  MapPin,
+  Check,
+  Copy,
+  Plus,
+  Minus,
+  Award,
+  GraduationCap,
+  Zap,
+} from "lucide-react";
+import { portfolioData as data } from "../data/portfolioData";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
-const Portfolio = () => {
-  useEffect(() => {
-    // Add Google Fonts
-    const link = document.createElement('link');
-    link.href = 'https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap';
-    link.rel = 'stylesheet';
-    document.head.appendChild(link);
+const SectionHeading = ({ number, label, title, children }) => (
+  <div className="section-heading">
+    <div>
+      <p className="eyebrow">
+        <span>{number}</span> {label}
+      </p>
+      <h2>{title}</h2>
+    </div>
+    {children && <p className="section-intro">{children}</p>}
+  </div>
+);
 
-    // Set default font
-    document.body.style.fontFamily = 'IBM Plex Sans, sans-serif';
-
-    return () => {
-      document.head.removeChild(link);
-    };
-  }, []);
-
-  const getIcon = (iconName) => {
-    const iconMap = {
-      'zap': 'Zap',
-      'trending-up': 'TrendingUp',
-      'database': 'Database',
-      'clock': 'Clock',
-      'activity': 'Activity',
-      'tv': 'Tv',
-      'file-presentation': 'FileText',
-      'award': 'Award',
-      'trophy': 'Trophy',
-      'graduation-cap': 'GraduationCap',
-      'badge-check': 'BadgeCheck'
-    };
-    const IconComponent = LucideIcons[iconMap[iconName]] || LucideIcons.Circle;
-    return <IconComponent />;
-  };
-
-  const scrollToContact = () => {
-    const element = document.getElementById('contact');
-    if (element) element.scrollIntoView({ behavior: 'smooth' });
-  };
-
+function PipelineVisual() {
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
+    <div
+      className="pipeline-visual"
+      aria-label="Illustrative data pipeline: cloud sources through Spark and Delta Lake to analytics"
+    >
+      <div className="visual-topline">
+        <span>
+          <i /> THE DATA ENGINEER'S CANVAS
+        </span>
+        <span>INGEST → INSIGHT</span>
+      </div>
+      <div className="orbit orbit-one" />
+      <div className="orbit orbit-two" />
+      <div className="orbit orbit-three" />
+      <svg
+        className="pipeline-wires"
+        viewBox="0 0 540 440"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path d="M95 155H190Q215 155 215 180V222H275M95 300H180Q215 300 215 270V222M320 222H385Q410 222 410 190V140H460M320 222H385Q410 222 410 255V315H460" />
+        <path
+          className="wire-highlight"
+          d="M95 155H190Q215 155 215 180V222H320H385Q410 222 410 255V315H460"
+        />
+      </svg>
+      <div className="pipeline-node source-node">
+        <Database size={23} />
+        <span>Cloud sources</span>
+        <small>INGEST</small>
+      </div>
+      <div className="pipeline-node lake-node">
+        <Layers3 size={23} />
+        <span>Delta Lake</span>
+        <small>STORE</small>
+      </div>
+      <div className="pipeline-core">
+        <div className="core-symbol">
+          <Zap size={38} strokeWidth={1.5} />
+        </div>
+        <strong>Apache Spark</strong>
+        <span>TRANSFORM & OPTIMIZE</span>
+      </div>
+      <div className="pipeline-node serve-node">
+        <Database size={22} />
+        <span>Apache Pinot</span>
+        <small>SERVE</small>
+      </div>
+      <div className="pipeline-node analytics-node">
+        <BarChart3 size={23} />
+        <span>Analytics</span>
+        <small>ACTIVATE</small>
+      </div>
+      <div className="visual-caption">
+        <span>
+          From raw signals.
+          <br />
+          <strong>To real business impact.</strong>
+        </span>
+        <span className="visual-mark">SM</span>
+      </div>
+    </div>
+  );
+}
+
+export default function Portfolio() {
+  const [expanded, setExpanded] = useState(null);
+  const [copied, setCopied] = useState(false);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        }),
+      { threshold: 0.07 },
+    );
+    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+  useEffect(() => {
+    if (!copied) return;
+    const timer = setTimeout(() => setCopied(false), 2500);
+    return () => clearTimeout(timer);
+  }, [copied]);
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(data.personal.email);
+      setCopied(true);
+    } catch {
+      window.location.href = `mailto:${data.personal.email}`;
+    }
+  };
+  return (
+    <div className="portfolio">
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
       <Navbar />
-
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-950 to-slate-950">
-          <div className="absolute inset-0 opacity-20" style={{
-            backgroundImage: 'radial-gradient(circle, #06b6d4 1px, transparent 1px)',
-            backgroundSize: '50px 50px'
-          }}></div>
-        </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
-          <div className="mb-6">
-            <Badge className="bg-cyan-500/10 text-cyan-400 border-cyan-500/20 text-sm px-4 py-1">
-              Open to Opportunities
-            </Badge>
+      <main id="main">
+        <section className="hero wrap" id="home">
+          <div className="hero-copy">
+            <div className="availability">
+              <i /> OPEN TO OPPORTUNITIES <span>•</span> BENGALURU, IN
+            </div>
+            <p className="hero-greeting">Hi, I'm Subhadeep.</p>
+            <h1>
+              I turn data
+              <br />
+              into <em>possibility.</em>
+            </h1>
+            <p className="hero-description">
+              {data.personal.title} at <strong>{data.personal.company}.</strong>{" "}
+              {data.personal.experience} building large-scale batch and
+              low-latency pipelines across Databricks, Snowflake, AWS, and GCP.
+            </p>
+            <div className="hero-actions">
+              <a className="button button-primary" href="#projects">
+                Explore my work <ArrowUpRight size={19} />
+              </a>
+              <a className="text-link" href={`mailto:${data.personal.email}`}>
+                Let's talk <ArrowRight size={17} />
+              </a>
+            </div>
+            <div className="hero-footnote">
+              <span className="mini-rule" /> PYSPARK · DATABRICKS · SNOWFLAKE ·
+              SQL
+            </div>
           </div>
-          
-          <h1 className="text-5xl sm:text-7xl font-bold mb-6">
-            <span className="text-white">{portfolioData.personal.name}</span>
-          </h1>
-          
-          <p className="text-2xl sm:text-3xl text-cyan-400 font-semibold mb-6" style={{ fontFamily: 'JetBrains Mono, monospace' }}>
-            {portfolioData.personal.title}
-          </p>
-          
-          <p className="text-xl text-slate-300 max-w-3xl mx-auto mb-12">
-            {portfolioData.personal.tagline}
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button
-              onClick={scrollToContact}
-              className="bg-cyan-500 hover:bg-cyan-600 text-slate-900 font-semibold px-8 py-6 text-lg"
-            >
-              <LucideIcons.Mail className="mr-2" size={20} />
-              Get in Touch
-            </Button>
-            <Button
-              onClick={() => {
-                const element = document.getElementById('projects');
-                if (element) element.scrollIntoView({ behavior: 'smooth' });
-              }}
-              variant="outline"
-              className="border-cyan-500 text-cyan-400 hover:bg-cyan-500/10 px-8 py-6 text-lg"
-            >
-              <LucideIcons.Briefcase className="mr-2" size={20} />
-              View My Work
-            </Button>
+          <PipelineVisual />
+          <div className="hero-bottom">
+            <span>
+              <MapPin size={14} /> {data.personal.location}
+            </span>
+            <a href="#impact">
+              A LITTLE LESS LATENCY. A LOT MORE IMPACT. <ArrowDown size={15} />
+            </a>
+            <div>
+              <a
+                href={data.social.github}
+                aria-label="GitHub"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <Github size={18} />
+              </a>
+              <a
+                href={data.social.linkedin}
+                aria-label="LinkedIn"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <Linkedin size={18} />
+              </a>
+            </div>
           </div>
-
-          {/* Scroll Indicator */}
-          <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <LucideIcons.ChevronDown className="text-cyan-400" size={32} />
-          </div>
-        </div>
-      </section>
-
-      {/* Key Metrics Section */}
-      <section className="py-20 bg-slate-900/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {portfolioData.keyMetrics.map((metric, index) => (
-              <Card key={index} className="bg-slate-800/50 border-slate-700 p-6 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10 hover:-translate-y-1">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="text-cyan-400">
-                    {getIcon(metric.icon)}
-                  </div>
-                </div>
-                <div className="text-3xl font-bold text-white mb-2" style={{ fontFamily: 'JetBrains Mono, monospace' }}>
-                  {metric.value}
-                </div>
-                <div className="text-slate-300 font-semibold mb-1">{metric.label}</div>
-                <div className="text-sm text-slate-400">{metric.description}</div>
-              </Card>
+        </section>
+        <section className="impact-band" id="impact" aria-label="Career impact">
+          <div className="wrap metrics">
+            {data.keyMetrics.map((metric, i) => (
+              <div className="metric" key={metric.label}>
+                <span className="metric-index">0{i + 1} /</span>
+                <strong>{metric.value}</strong>
+                <span>{metric.label}</span>
+                <small>{metric.description}</small>
+              </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* About Section */}
-      <section id="about" className="py-24 bg-slate-950">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        </section>
+        <section className="section wrap reveal" id="projects">
+          <SectionHeading
+            number="01"
+            label="SELECTED WORK"
+            title={
+              <>
+                Engineered for
+                <br />
+                <em>real-world impact.</em>
+              </>
+            }
+          >
+            A selection of production work at MiQ Digital — from high-throughput
+            pipelines to analytics that keep up with the business.
+          </SectionHeading>
+          <div className="projects-grid">
+            {data.projects.map((project, i) => (
+              <article
+                className={`project project-${i} ${expanded === i ? "project-expanded" : ""}`}
+                key={project.title}
+              >
+                <div className="project-art" aria-hidden="true">
+                  <span className="art-label">{project.category}</span>
+                  {i === 0 ? (
+                    <div className="lakehouse-art">
+                      <div className="lakehouse-scale">
+                        <strong>12M+</strong>
+                        <span>RECORDS IN THE ANALYTICS UI</span>
+                      </div>
+                      <div className="lakehouse-steps">
+                        <span>CONFIG</span>
+                        <ArrowRight size={16} />
+                        <span>PySpark</span>
+                        <ArrowRight size={16} />
+                        <span>DELTA</span>
+                      </div>
+                      <p>45% less refresh runtime</p>
+                    </div>
+                  ) : i === 1 ? (
+                    <div className="automation-art integration-art">
+                      <div>
+                        <Layers3 size={27} />
+                        <span>Unity Catalog / S3</span>
+                      </div>
+                      <ArrowRight size={24} />
+                      <div>
+                        <Database size={27} />
+                        <span>Snowflake</span>
+                      </div>
+                      <span className="automation-stamp">
+                        APACHE ICEBERG · EXTERNAL VOLUMES
+                      </span>
+                    </div>
+                  ) : i === 2 ? (
+                    <div className="query-art">
+                      <div>
+                        <span>SELECT</span> business_impact
+                      </div>
+                      <div>
+                        <span>FROM</span> real_time_data
+                      </div>
+                      <div>
+                        <span>WHERE</span> latency <b>&lt; 10s</b>
+                      </div>
+                      <div className="query-result">
+                        <i /> 100K+ rows/query <strong>10s SLA</strong>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="batch-art">
+                      <Database size={31} />
+                      <strong>50M+</strong>
+                      <span>ROWS / RUN</span>
+                      <p>Idempotent writes. Automated backfills.</p>
+                    </div>
+                  )}
+                  <span className="art-number">0{i + 1}</span>
+                </div>
+                <div className="project-body">
+                  <div className="project-meta">
+                    <span>MiQ / ENGINEERING</span>
+                    <span className="impact-tag">{project.impact}</span>
+                  </div>
+                  <h3>{project.title}</h3>
+                  <p>{project.description}</p>
+                  <div className="project-tech">
+                    {project.tech.map((tech) => (
+                      <span key={tech}>{tech}</span>
+                    ))}
+                  </div>
+                  <button
+                    className="project-toggle"
+                    onClick={() => setExpanded(expanded === i ? null : i)}
+                    aria-expanded={expanded === i}
+                    aria-controls={`project-detail-${i}`}
+                  >
+                    {expanded === i ? "Less detail" : "Explore the approach"}
+                    {expanded === i ? <Minus size={17} /> : <Plus size={17} />}
+                  </button>
+                  <div
+                    id={`project-detail-${i}`}
+                    hidden={expanded !== i}
+                    className="project-detail"
+                  >
+                    {project.approach}
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+        <section className="about-section" id="about">
+          <div className="wrap section reveal about-grid">
             <div>
-              <h2 className="text-4xl font-bold mb-6 text-white">
-                About Me
+              <p className="eyebrow">
+                <span>02</span> THE PERSON BEHIND THE PIPELINES
+              </p>
+              <h2>
+                Curious by nature.
+                <br />
+                <em>Engineer by craft.</em>
               </h2>
-              <div className="space-y-4 text-slate-300 text-lg leading-relaxed">
-                <p>{portfolioData.personal.summary}</p>
-                <p>
-                  Currently based in {portfolioData.personal.location}, I specialize in modern data stack technologies including Databricks, Apache Pinot, and cloud platforms like AWS and GCP.
-                </p>
-                <p>
-                  When I'm not optimizing data pipelines, you'll find me watching {portfolioData.interests.join(', ')}.
-                </p>
+              <div className="about-signature">
+                Subhadeep Mondal <ArrowUpRight size={24} />
               </div>
-
-              <div className="mt-8 flex flex-wrap gap-3">
-                {portfolioData.languages.map((lang, index) => (
-                  <Badge key={index} variant="outline" className="border-slate-600 text-slate-300">
-                    {lang}
-                  </Badge>
+            </div>
+            <div className="about-copy">
+              <p className="large-copy">
+                I like solving the problems between <span>raw data</span> and{" "}
+                <span>a useful answer.</span>
+              </p>
+              <p>{data.personal.summary}</p>
+              <p>
+                Based in {data.personal.location}, I work across Databricks,
+                Apache Pinot, AWS, and GCP. Away from the keyboard, it's{" "}
+                {data.interests.join(", ").toLowerCase()}.
+              </p>
+              <div className="language-line">
+                LET'S TALK IN <span>{data.languages.join(" / ")}</span>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section
+          className="section wrap reveal education-section"
+          id="education"
+        >
+          <SectionHeading
+            number="03"
+            label="ACADEMIC BACKGROUND"
+            title="Education"
+          />
+          <div className="education-grid">
+            {data.education.map((item, i) => (
+              <article className="education-card" key={item.institution}>
+                <div className="education-card-top">
+                  <span>0{i + 1}</span>
+                  <GraduationCap size={25} />
+                </div>
+                <p className="education-qualification">{item.qualification}</p>
+                <h3>{item.institution}</h3>
+                {item.period && (
+                  <p className="education-period">{item.period}</p>
+                )}
+                <div className="education-result">
+                  <strong>{item.result}</strong>
+                  <span>{item.resultLabel}</span>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+        <section className="section wrap reveal" id="experience">
+          <SectionHeading
+            number="04"
+            label="THE JOURNEY"
+            title={
+              <>
+                Building. Learning.
+                <br />
+                <em>Moving things forward.</em>
+              </>
+            }
+          >
+            Growing through hands-on ownership of production data systems,
+            performance, and reliability.
+          </SectionHeading>
+          <div className="experience-list">
+            {data.experience.map((exp, i) => (
+              <article className="experience-row" key={exp.role}>
+                <div className="experience-date">
+                  <span className={i === 0 ? "current-role" : ""}>
+                    {i === 0 ? "CURRENT" : "PREVIOUSLY"}
+                  </span>
+                  <p>{exp.period}</p>
+                  <small>{exp.location}</small>
+                </div>
+                <div className="experience-content">
+                  <div className="role-title">
+                    <h3>{exp.role}</h3>
+                    <span>
+                      {exp.company} <ArrowUpRight size={18} />
+                    </span>
+                  </div>
+                  <ul>
+                    {exp.achievements.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+        <section className="skills-section" id="skills">
+          <div className="wrap section reveal">
+            <SectionHeading
+              number="05"
+              label="THE TOOLKIT"
+              title={
+                <>
+                  The right tools.
+                  <br />
+                  <em>The bigger picture.</em>
+                </>
+              }
+            >
+              From ingestion to insight, a practical toolkit built around
+              reliable, efficient data systems.
+            </SectionHeading>
+            <div className="skills-list">
+              {Object.entries(data.skills).map(([category, skills], i) => (
+                <div className="skill-row" key={category}>
+                  <span className="skill-number">0{i + 1}</span>
+                  <h3>{category}</h3>
+                  <div>
+                    {skills.map((skill) => (
+                      <span key={skill}>{skill}</span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="recognition">
+              <p className="eyebrow">A FEW MILESTONES ALONG THE WAY</p>
+              <div>
+                {data.achievements.map((item) => (
+                  <div key={item.title}>
+                    <Award size={20} />
+                    <h3>{item.title}</h3>
+                    <p>
+                      {item.organization} <span>· {item.period}</span>
+                    </p>
+                  </div>
                 ))}
               </div>
             </div>
-
-            <Card className="bg-slate-800/30 border-slate-700 p-8">
-              <h3 className="text-2xl font-bold mb-6 text-cyan-400">Education</h3>
-              <div className="space-y-3">
-                <div className="flex items-start">
-                  <LucideIcons.GraduationCap className="text-cyan-400 mr-3 mt-1" size={24} />
-                  <div>
-                    <div className="text-white font-semibold text-lg">{portfolioData.education.degree}</div>
-                    <div className="text-slate-300">{portfolioData.education.institution}</div>
-                    <div className="text-slate-400 text-sm mt-1">{portfolioData.education.period}</div>
-                    <div className="mt-2">
-                      <Badge className="bg-emerald-500/10 text-emerald-400 border-emerald-500/20">
-                        CGPA: {portfolioData.education.cgpa}/10
-                      </Badge>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Card>
           </div>
-        </div>
-      </section>
-
-      {/* Experience Section - Continued in next file part */}
-      <section id="experience" className="py-24 bg-slate-900/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold mb-12 text-center text-white">
-            Professional Experience
-          </h2>
-
-          <div className="relative">
-            {/* Timeline Line */}
-            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-cyan-500/30 hidden md:block"></div>
-
-            <div className="space-y-12">
-              {portfolioData.experience.map((exp, index) => (
-                <div key={index} className="relative">
-                  {/* Timeline Dot */}
-                  <div className="absolute left-6 top-6 w-5 h-5 rounded-full bg-cyan-500 border-4 border-slate-950 hidden md:block"></div>
-
-                  <Card className="bg-slate-800/50 border-slate-700 p-8 md:ml-20 hover:border-cyan-500/50 transition-all duration-300">
-                    <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                      <div>
-                        <h3 className="text-2xl font-bold text-white">{exp.role}</h3>
-                        <p className="text-cyan-400 font-semibold text-lg">{exp.company}</p>
-                      </div>
-                      <div className="mt-2 md:mt-0 text-right">
-                        <Badge className="bg-slate-700 text-slate-300">
-                          {exp.period}
-                        </Badge>
-                        <p className="text-slate-400 text-sm mt-1">{exp.location}</p>
-                      </div>
-                    </div>
-
-                    <ul className="space-y-3 mt-6">
-                      {exp.achievements.map((achievement, idx) => (
-                        <li key={idx} className="flex items-start text-slate-300">
-                          <LucideIcons.CheckCircle2 className="text-emerald-400 mr-3 mt-1 flex-shrink-0" size={20} />
-                          <span>{achievement}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </Card>
-                </div>
-              ))}
+        </section>
+        <section id="contact" className="contact-section">
+          <div className="wrap reveal">
+            <p className="eyebrow">
+              <span>06</span> WHAT'S NEXT?
+            </p>
+            <div className="contact-heading">
+              <h2>
+                Good work starts
+                <br />
+                with a <em>conversation.</em>
+              </h2>
+              <a
+                className="contact-arrow"
+                href={`mailto:${data.personal.email}`}
+                aria-label="Email Subhadeep"
+              >
+                <ArrowUpRight size={48} />
+              </a>
+            </div>
+            <p>
+              Have an interesting data challenge or an opportunity in mind?
+              <br />
+              I'd love to hear about it.
+            </p>
+            <div className="contact-bottom">
+              <a className="email-link" href={`mailto:${data.personal.email}`}>
+                {data.personal.email}
+              </a>
+              <button
+                className="copy-button"
+                onClick={copyEmail}
+                aria-label="Copy email address"
+              >
+                {copied ? <Check size={18} /> : <Copy size={18} />}
+                <span aria-live="polite">
+                  {copied ? "Copied!" : "Copy email"}
+                </span>
+              </button>
+              <div className="contact-social">
+                <a href={data.social.linkedin} target="_blank" rel="noreferrer">
+                  LinkedIn <ArrowUpRight size={15} />
+                </a>
+                <a href={data.social.github} target="_blank" rel="noreferrer">
+                  GitHub <ArrowUpRight size={15} />
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Skills Section */}
-      <section id="skills" className="py-24 bg-slate-950">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold mb-4 text-center text-white">
-            Technical Skills
-          </h2>
-          <p className="text-slate-400 text-center mb-12 max-w-2xl mx-auto">
-            Experienced in modern data engineering tools and practices
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {Object.entries(portfolioData.skills).map(([category, skills], index) => (
-              <Card key={index} className="bg-slate-800/30 border-slate-700 p-6 hover:border-cyan-500/50 transition-all duration-300">
-                <h3 className="text-xl font-bold mb-4 text-cyan-400">{category}</h3>
-                <div className="flex flex-wrap gap-2">
-                  {skills.map((skill, idx) => (
-                    <Badge
-                      key={idx}
-                      className="bg-slate-700 text-slate-200 hover:bg-cyan-500/20 hover:text-cyan-300 transition-colors"
-                      style={{ fontFamily: 'JetBrains Mono, monospace' }}
-                    >
-                      {skill}
-                    </Badge>
-                  ))}
-                </div>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Projects Section - Render in separate part */}
-      <ProjectsSection portfolioData={portfolioData} getIcon={getIcon} />
-
-      {/* Achievements Section */}
-      <AchievementsSection portfolioData={portfolioData} getIcon={getIcon} />
-
-      {/* Contact Section */}
-      <ContactSection />
-
+        </section>
+      </main>
       <Footer />
     </div>
   );
-};
-
-// Projects Section Component
-const ProjectsSection = ({ portfolioData, getIcon }) => (
-  <section id="projects" className="py-24 bg-slate-900/30">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 className="text-4xl font-bold mb-4 text-center text-white">
-        Key Projects & Impact
-      </h2>
-      <p className="text-slate-400 text-center mb-12 max-w-2xl mx-auto">
-        Delivering measurable business value through technical excellence
-      </p>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {portfolioData.projects.map((project, index) => (
-          <Card key={index} className="bg-slate-800/50 border-slate-700 p-6 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10 hover:-translate-y-1">
-            <div className="flex items-start justify-between mb-4">
-              <div className="text-cyan-400 bg-cyan-500/10 p-3 rounded-lg">
-                {getIcon(project.icon)}
-              </div>
-            </div>
-            <h3 className="text-xl font-bold text-white mb-3">{project.title}</h3>
-            <p className="text-slate-300 mb-4">{project.description}</p>
-            <div className="mb-4">
-              <Badge className="bg-emerald-500/10 text-emerald-400 border-emerald-500/20">
-                {project.impact}
-              </Badge>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {project.tech.map((tech, idx) => (
-                <Badge key={idx} variant="outline" className="border-slate-600 text-slate-400 text-xs">
-                  {tech}
-                </Badge>
-              ))}
-            </div>
-          </Card>
-        ))}
-      </div>
-    </div>
-  </section>
-);
-
-// Achievements Section Component
-const AchievementsSection = ({ portfolioData, getIcon }) => (
-  <section className="py-24 bg-slate-950">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 className="text-4xl font-bold mb-12 text-center text-white">
-        Achievements & Recognition
-      </h2>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {portfolioData.achievements.map((achievement, index) => (
-          <Card key={index} className="bg-gradient-to-br from-slate-800/50 to-slate-800/30 border-slate-700 p-6 text-center hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10">
-            <div className="flex justify-center mb-4">
-              <div className="text-cyan-400 bg-cyan-500/10 p-4 rounded-full">
-                {getIcon(achievement.icon)}
-              </div>
-            </div>
-            <h3 className="text-lg font-bold text-white mb-2">{achievement.title}</h3>
-            <p className="text-slate-300 text-sm mb-1">{achievement.organization}</p>
-            <p className="text-slate-400 text-xs">{achievement.period}</p>
-          </Card>
-        ))}
-      </div>
-    </div>
-  </section>
-);
-
-// Contact Section Component  
-const ContactSection = () => {
-  const [formData, setFormData] = React.useState({ name: '', email: '', message: '' });
-  const [status, setStatus] = React.useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setStatus('Message sent! (Demo mode - no actual email sent)');
-    setTimeout(() => setStatus(''), 3000);
-    setFormData({ name: '', email: '', message: '' });
-  };
-
-  return (
-    <section id="contact" className="py-24 bg-slate-900/30">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl font-bold mb-4 text-center text-white">
-          Let's Connect
-        </h2>
-        <p className="text-slate-400 text-center mb-12 max-w-2xl mx-auto">
-          Interested in collaborating or discussing data engineering opportunities? Reach out!
-        </p>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          {[
-            { icon: 'Mail', label: 'Email', value: 'subhadeep.mondal2001@gmail.com', link: 'mailto:subhadeep.mondal2001@gmail.com' },
-            { icon: 'Linkedin', label: 'LinkedIn', value: 'Connect on LinkedIn', link: 'https://www.linkedin.com/in/subhadeep-mondal-kiit/' },
-            { icon: 'Github', label: 'GitHub', value: 'View my code', link: 'https://github.com/smondal1174' }
-          ].map((contact, index) => {
-            const Icon = LucideIcons[contact.icon];
-            return (
-              <a
-                key={index}
-                href={contact.link}
-                target={contact.link.startsWith('http') ? '_blank' : undefined}
-                rel={contact.link.startsWith('http') ? 'noopener noreferrer' : undefined}
-                className="block"
-              >
-                <Card className="bg-slate-800/30 border-slate-700 p-6 text-center hover:border-cyan-500/50 transition-all duration-300 hover:-translate-y-1">
-                  <Icon className="text-cyan-400 mx-auto mb-3" size={32} />
-                  <h3 className="text-white font-semibold mb-1">{contact.label}</h3>
-                  <p className="text-slate-400 text-sm">{contact.value}</p>
-                </Card>
-              </a>
-            );
-          })}
-        </div>
-
-        <Card className="bg-slate-800/30 border-slate-700 p-8">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label className="block text-white font-semibold mb-2">Name</label>
-              <input
-                type="text"
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                required
-                className="w-full bg-slate-900/50 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
-                placeholder="Your name"
-              />
-            </div>
-            <div>
-              <label className="block text-white font-semibold mb-2">Email</label>
-              <input
-                type="email"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                required
-                className="w-full bg-slate-900/50 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
-                placeholder="your.email@example.com"
-              />
-            </div>
-            <div>
-              <label className="block text-white font-semibold mb-2">Message</label>
-              <textarea
-                value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                required
-                rows={5}
-                className="w-full bg-slate-900/50 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors resize-none"
-                placeholder="Your message..."
-              />
-            </div>
-            <Button
-              type="submit"
-              className="w-full bg-cyan-500 hover:bg-cyan-600 text-slate-900 font-semibold py-3 text-lg"
-            >
-              <LucideIcons.Send className="mr-2" size={20} />
-              Send Message
-            </Button>
-            {status && (
-              <p className="text-center text-emerald-400 mt-4">{status}</p>
-            )}
-          </form>
-        </Card>
-      </div>
-    </section>
-  );
-};
-
-export default Portfolio;
+}

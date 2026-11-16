@@ -1,105 +1,82 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
-import { Button } from './ui/button';
+import React, { useEffect, useState } from "react";
+import { Menu, X, ArrowUpRight } from "lucide-react";
 
-const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
+const links = [
+  ["Work", "projects"],
+  ["About", "about"],
+  ["Education", "education"],
+  ["Experience", "experience"],
+  ["Toolkit", "skills"],
+];
+export default function Navbar() {
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState("");
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+    const observer = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(entry.target.id);
+        }),
+      { rootMargin: "-20% 0px -55% 0px" },
+    );
+    [...links.map(([, id]) => id), "contact", "home"].forEach((id) => {
+      const section = document.getElementById(id);
+      if (section) observer.observe(section);
+    });
+    const closeOnEscape = (event) => {
+      if (event.key === "Escape") setOpen(false);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("keydown", closeOnEscape);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("keydown", closeOnEscape);
+    };
   }, []);
-
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      setIsMobileMenuOpen(false);
-    }
-  };
-
-  const navItems = [
-    { label: 'About', id: 'about' },
-    { label: 'Experience', id: 'experience' },
-    { label: 'Skills', id: 'skills' },
-    { label: 'Projects', id: 'projects' },
-    { label: 'Contact', id: 'contact' }
-  ];
-
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-slate-900/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="text-xl font-bold text-cyan-400 hover:text-cyan-300 transition-colors"
-            style={{ fontFamily: 'JetBrains Mono, monospace' }}
-          >
-            &lt;SM /&gt;
-          </button>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className="text-slate-300 hover:text-cyan-400 transition-colors text-sm font-medium"
-              >
-                {item.label}
-              </button>
-            ))}
-            <Button
-              onClick={() => scrollToSection('contact')}
-              className="bg-cyan-500 hover:bg-cyan-600 text-slate-900 font-semibold"
+    <header className="site-header">
+      <nav className="wrap nav-inner" aria-label="Main navigation">
+        <a
+          className="wordmark"
+          href="#home"
+          aria-label="Subhadeep Mondal home"
+          onClick={() => setOpen(false)}
+        >
+          sm<span>.</span>
+          <small>
+            SUBHADEEP
+            <br />
+            MONDAL
+          </small>
+        </a>
+        <div className={`nav-links ${open ? "is-open" : ""}`} id="navigation">
+          {links.map(([label, id]) => (
+            <a
+              href={`#${id}`}
+              key={id}
+              onClick={() => setOpen(false)}
+              aria-current={active === id ? "location" : undefined}
             >
-              Get in Touch
-            </Button>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden text-slate-300 hover:text-cyan-400 transition-colors"
+              {label}
+            </a>
+          ))}
+          <a
+            href="#contact"
+            className="nav-contact"
+            onClick={() => setOpen(false)}
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+            Let's connect <ArrowUpRight size={16} />
+          </a>
         </div>
-      </div>
-
-      {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden bg-slate-900 border-t border-slate-800">
-          <div className="px-4 py-4 space-y-3">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className="block w-full text-left text-slate-300 hover:text-cyan-400 transition-colors py-2"
-              >
-                {item.label}
-              </button>
-            ))}
-            <Button
-              onClick={() => scrollToSection('contact')}
-              className="w-full bg-cyan-500 hover:bg-cyan-600 text-slate-900 font-semibold"
-            >
-              Get in Touch
-            </Button>
-          </div>
-        </div>
-      )}
-    </nav>
+        <button
+          className="menu-button"
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+          aria-controls="navigation"
+          onClick={() => setOpen(!open)}
+        >
+          {open ? <X /> : <Menu />}
+        </button>
+      </nav>
+    </header>
   );
-};
-
-export default Navbar;
+}

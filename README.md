@@ -7,7 +7,7 @@
 ![TailwindCSS](https://img.shields.io/badge/Tailwind-3.4.17-38B2AC?style=for-the-badge&logo=tailwind-css)
 ![Status](https://img.shields.io/badge/Status-Live-success?style=for-the-badge)
 
-**Modern, responsive portfolio website showcasing 2+ years of Data Engineering experience**
+**Modern, responsive portfolio website showcasing 4+ years of Data Engineering experience**
 
 [View Live Demo](#) | [View CV](https://github.com/smondal1174) | [Contact Me](mailto:subhadeep.mondal2001@gmail.com)
 
@@ -60,10 +60,10 @@ frontend/
 
 ## 🎨 Design Features
 
-- **Clean UI**: Modern, professional design with IBM Plex Sans & JetBrains Mono fonts
-- **Color Scheme**: Tech-inspired slate gray with cyan accents
-- **Animations**: Smooth transitions and hover effects
-- **Components**: Cards, badges, buttons, and forms using shadcn/ui
+- **Clean UI**: Editorial layout with Manrope, DM Sans, and IBM Plex Mono typography
+- **Color Scheme**: Warm ivory, ink, sage, and burnt-orange accents
+- **Animations**: Subtle scroll reveals and an illustrative pipeline with reduced-motion support
+- **Components**: Custom project visuals, expandable project details, sticky navigation, and email copying
 - **Icons**: Lucide React icon library
 
 ## 🚀 Getting Started
@@ -105,7 +105,7 @@ yarn build
 4. **Skills** - Organized technical skills showcase
 5. **Projects** - Key projects with business impact
 6. **Achievements** - Certifications and recognition
-7. **Contact** - Contact form and social links
+7. **Contact** - Direct email, copy-email action, and social links
 
 ## 📫 Contact
 
@@ -166,3 +166,9 @@ This project is open source and available under the [MIT License](LICENSE).
 ---
 
 **Last Updated**: March 2026
+
+## Career content
+
+Career copy is aligned with the November resume: Data Engineer II at MiQ Digital (Apr 2025–Present), Data Engineer I (Jul 2022–Apr 2025). Edit `frontend/src/data/portfolioData.js` for the summary, metrics, experience, skills, project approaches, education, and achievements. Project artwork is illustrative; the displayed outcomes come from the resume.
+
+Education includes St. Teresa's School (ICSE, 91%), Vikas Vidyaniketan (CBSE, 94%), and KIIT (9.2 GPA), as provided by the portfolio owner.
